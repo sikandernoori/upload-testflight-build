@@ -1,9 +1,8 @@
 import * as core from '@actions/core'
 import * as os from 'os'
 import * as altool from './altool'
-import {retry} from 'ts-retry-promise'
-
-import {ExecOptions} from '@actions/exec/lib/interfaces'
+import { retry } from 'ts-retry-promise'
+import { ExecOptions } from '@actions/exec/lib/interfaces'
 
 async function run(): Promise<void> {
   try {
@@ -31,26 +30,36 @@ async function run(): Promise<void> {
     await altool.installPrivateKey(apiKeyId, apiPrivateKey)
 
     const uploadWithRetry = async (): Promise<void> => {
-      core.warning('SRK')
       await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
-        throw new Error('Upload failed due to timeout')
+        throw new Error('timeout')
+      }
+    }
+
+    const attemptUpload = async (): Promise<void> => {
+      try {
+        await uploadWithRetry()
+      } catch (error: any) {
+        if (error.message === 'timeout') {
+          throw error
+        } else {
+          core.setFailed(`Upload failed: ${error.message}`)
+          return
+        }
       }
     }
 
     try {
-      await retry(uploadWithRetry, {retries: retryAttempts, delay: 2000})
-    } catch (error) {
-      core.setFailed(
-        `Upload failed after ${retryAttempts} attempts: ${error.message}`
-      )
+      await retry(attemptUpload, { retries: retryAttempts, delay: 2000 })
+    } catch (error: any) {
+      core.setFailed(`Upload failed after ${retryAttempts} attempts: ${error.message}`)
       return
     }
 
     await altool.deleteAllPrivateKeys()
 
     core.setOutput('altool-response', output)
-  } catch (error) {
+  } catch (error: any) {
     core.setFailed(error.message)
   }
 }
