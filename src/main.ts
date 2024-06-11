@@ -47,7 +47,7 @@ async function run(): Promise<void> {
         retries: retryAttempts,
         delay: 2000,
         retryIf(error) {
-          core.warning(`ERROR WAS: ${error}`)
+          core.warning(`ERROR WAS: ${error.message}`)
           return true
         }
       })
