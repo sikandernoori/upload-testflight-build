@@ -152,28 +152,20 @@ function run() {
             yield altool.installPrivateKey(apiKeyId, apiPrivateKey);
             const uploadWithRetry = () => __awaiter(this, void 0, void 0, function* () {
                 yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
-                // if (output.includes('timeout')) {
-                throw new Error('timeout');
-                // }
-            });
-            const attemptUpload = () => __awaiter(this, void 0, void 0, function* () {
-                try {
-                    yield uploadWithRetry();
-                }
-                catch (error) {
-                    core.warning(`${error} complete`);
-                    if (error.name === 'timeout') {
-                        throw error;
-                    }
-                    else {
-                        core.setFailed(`Upload failed: ${error.message}`);
-                        return;
-                    }
+                if (output.includes('timeout')) {
+                    throw Error('timeout');
                 }
             });
             try {
                 core.warning(`${retryAttempts} attempts`);
-                yield ts_retry_promise_1.retry(attemptUpload, { retries: retryAttempts, delay: 2000 });
+                yield ts_retry_promise_1.retry(uploadWithRetry, {
+                    retries: retryAttempts,
+                    delay: 2000,
+                    retryIf(error) {
+                        core.warning(`ERROR WAS: ${error}`);
+                        return true;
+                    }
+                });
             }
             catch (error) {
                 core.setFailed(`Upload failed after ${retryAttempts} attempts: ${error.message}`);

@@ -31,28 +31,21 @@ async function run(): Promise<void> {
 
     const uploadWithRetry = async (): Promise<void> => {
       await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
-      // if (output.includes('timeout')) {
-      throw new Error('timeout')
-      // }
-    }
-
-    const attemptUpload = async (): Promise<void> => {
-      try {
-        await uploadWithRetry()
-      } catch (error) {
-        core.warning(`${error} complete`)
-        if (error.name === 'timeout') {
-          throw error
-        } else {
-          core.setFailed(`Upload failed: ${error.message}`)
-          return
-        }
+      if (output.includes('timeout')) {
+        throw Error('timeout')
       }
     }
 
     try {
       core.warning(`${retryAttempts} attempts`)
-      await retry(attemptUpload, {retries: retryAttempts, delay: 2000})
+      await retry(uploadWithRetry, {
+        retries: retryAttempts,
+        delay: 2000,
+        retryIf(error) {
+          core.warning(`ERROR WAS: ${error}`)
+          return true
+        }
+      })
     } catch (error) {
       core.setFailed(
         `Upload failed after ${retryAttempts} attempts: ${error.message}`
