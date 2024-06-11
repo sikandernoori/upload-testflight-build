@@ -161,6 +161,7 @@ function run() {
                     yield uploadWithRetry();
                 }
                 catch (error) {
+                    core.warning(`name: ${error.name} | message ${error.message}`);
                     if (error.name === 'timeout') {
                         throw error;
                     }
@@ -171,6 +172,7 @@ function run() {
                 }
             });
             try {
+                core.warning(`${retryAttempts} attempts`);
                 yield ts_retry_promise_1.retry(attemptUpload, { retries: retryAttempts, delay: 2000 });
             }
             catch (error) {
