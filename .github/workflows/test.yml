@@ -6,10 +6,6 @@ jobs:
   build: # make sure build/ci work properly
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm install
-          npm run all
       - name: 'Upload app to TestFlight'
         uses: ./action
         with:
@@ -17,3 +13,4 @@ jobs:
           issuer-id: test
           api-key-id: test
           api-private-key: test
+          retry-attempts-on-timeout: 10
