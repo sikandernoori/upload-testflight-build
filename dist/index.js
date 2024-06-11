@@ -152,9 +152,9 @@ function run() {
             yield altool.installPrivateKey(apiKeyId, apiPrivateKey);
             const uploadWithRetry = () => __awaiter(this, void 0, void 0, function* () {
                 yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
-                if (output.includes("The file 'path/to/application.ipa' cannot be found")) {
-                    throw new Error('timeout');
-                }
+                // if (output.includes('timeout')) {
+                throw new Error('timeout');
+                // }
             });
             const attemptUpload = () => __awaiter(this, void 0, void 0, function* () {
                 try {

@@ -32,11 +32,9 @@ async function run(): Promise<void> {
 
     const uploadWithRetry = async (): Promise<void> => {
       await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
-      if (
-        output.includes("The file 'path/to/application.ipa' cannot be found")
-      ) {
-        throw new Error('timeout')
-      }
+      // if (output.includes('timeout')) {
+      throw new Error('timeout')
+      // }
     }
 
     const attemptUpload = async (): Promise<void> => {
