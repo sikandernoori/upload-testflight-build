@@ -172,6 +172,7 @@ function run() {
             }
             catch (error) {
                 core.warning(`Upload failed after ${retryAttempts} attempts: ${error.message}`);
+                throw error;
             }
             yield altool.deleteAllPrivateKeys();
             core.setOutput('altool-response', output);

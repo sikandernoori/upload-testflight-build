@@ -53,6 +53,7 @@ async function run(): Promise<void> {
       core.warning(
         `Upload failed after ${retryAttempts} attempts: ${error.message}`
       )
+      throw error
     }
 
     await altool.deleteAllPrivateKeys()
