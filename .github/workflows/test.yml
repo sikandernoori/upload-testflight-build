@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: 'Upload app to TestFlight'
-        uses: ./action
+        uses: ./
         with:
           app-path: 'path/to/application.ipa'
           issuer-id: test
