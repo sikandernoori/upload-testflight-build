@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import * as core from '@actions/core'
 import * as os from 'os'
 import * as altool from './altool'
@@ -32,9 +31,9 @@ async function run(): Promise<void> {
     // await altool.installPrivateKey(apiKeyId, apiPrivateKey)
 
     const uploadWithRetry = async (): Promise<void> => {
-      core.warning("SRK")
-      core.debug("SRK")
-      core.setFailed("SRK")
+      core.warning('SRK')
+      core.debug('SRK')
+      core.setFailed('SRK')
       // await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
         throw new Error('Upload failed due to timeout')
@@ -44,7 +43,9 @@ async function run(): Promise<void> {
     try {
       await retry(uploadWithRetry, {retries: retryAttempts, delay: 2000})
     } catch (error) {
-      core.setFailed(`Upload failed after ${retryAttempts} attempts: ${error.message}`)
+      core.setFailed(
+        `Upload failed after ${retryAttempts} attempts: ${error.message}`
+      )
       return
     }
 
