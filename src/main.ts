@@ -35,7 +35,7 @@ async function run(): Promise<void> {
       core.warning("SRK")
       core.debug("SRK")
       core.setFailed("SRK")
-      // await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
+      await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
         throw new Error('Upload failed due to timeout')
       }
