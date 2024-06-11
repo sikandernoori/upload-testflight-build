@@ -170,8 +170,7 @@ function run() {
                 });
             }
             catch (error) {
-                core.setFailed(`Upload failed after ${retryAttempts} attempts: ${error.message}`);
-                return;
+                core.warning(`Upload failed after ${retryAttempts} attempts: ${error.message}`);
             }
             yield altool.deleteAllPrivateKeys();
             core.setOutput('altool-response', output);
