@@ -16,8 +16,7 @@ async function run(): Promise<void> {
     const appPath: string = core.getInput('app-path')
     const appType: string = core.getInput('app-type')
     const retryAttempts: number = parseInt(
-      core.getInput('retry-attempts-on-timeout'),
-      10
+      core.getInput('retry-attempts-on-timeout')
     )
 
     let output = ''
