@@ -158,6 +158,7 @@ function run() {
                     if (output.includes('The request timed out')) {
                         throw Error('timeout');
                     }
+                    throw e;
                 }
             });
             try {

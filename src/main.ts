@@ -36,6 +36,8 @@ async function run(): Promise<void> {
         if (output.includes('The request timed out')) {
           throw Error('timeout')
         }
+
+        throw e
       }
     }
 
