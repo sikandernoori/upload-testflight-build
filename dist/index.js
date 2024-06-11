@@ -141,7 +141,7 @@ function run() {
             const apiPrivateKey = core.getInput('api-private-key');
             const appPath = core.getInput('app-path');
             const appType = core.getInput('app-type');
-            const retryAttempts = parseInt(core.getInput('retry-attempts-on-timeout'));
+            const retryAttempts = parseInt(core.getInput('retry-attempts-on-timeout'), 10);
             let output = '';
             const options = {};
             options.listeners = {
