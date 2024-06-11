@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Apple-Actions/upload-testflight-build.git"
+    "url": "git+https://github.com/Apple-Actions/upload-testflight-build1.git"
   },
   "keywords": [
     "actions",
