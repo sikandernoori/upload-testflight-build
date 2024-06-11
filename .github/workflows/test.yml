@@ -1,10 +1,6 @@
 name: "build-test"
 on: # rebuild any PRs and main branch changes
-  pull_request:
   push:
-    branches:
-      - master
-      - 'releases/*'
 
 jobs:
   build: # make sure build/ci work properly
@@ -14,3 +10,10 @@ jobs:
       - run: |
           npm install
           npm run all
+      - name: 'Upload app to TestFlight'
+        uses: ./action
+        with:
+          app-path: 'path/to/application.ipa'
+          issuer-id: test
+          api-key-id: test
+          api-private-key: test
