@@ -15,4 +15,4 @@ jobs:
           issuer-id: test
           api-key-id: test
           api-private-key: test
-          retry-attempts-on-timeout: 10
+          retry-attempts-on-timeouts: 10
