@@ -33,16 +33,14 @@ async function run(): Promise<void> {
       try {
         await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       } catch (e) {
-        core.warning(`REALLY!!! ${e}`)
-
-        // if (output.includes('timeout')) {
-        throw Error('timeout')
-        // }
+        // TODO(skandar) Instead of searching substring, xml should be parsed and checked by key/value for timout.
+        if (output.includes('timeout')) {
+          throw Error('timeout')
+        }
       }
     }
 
     try {
-      core.warning(`${retryAttempts} attempts`)
       await retry(uploadWithRetry, {
         retries: retryAttempts,
         delay: 2000,
