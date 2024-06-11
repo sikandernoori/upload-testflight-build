@@ -151,9 +151,14 @@ function run() {
             };
             yield altool.installPrivateKey(apiKeyId, apiPrivateKey);
             const uploadWithRetry = () => __awaiter(this, void 0, void 0, function* () {
-                yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
-                if (output.includes('timeout')) {
-                    throw Error('timeout');
+                try {
+                    yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
+                    if (output.includes('timeout')) {
+                        throw Error('timeout');
+                    }
+                }
+                catch (e) {
+                    core.warning('REALLY!!!');
                 }
             });
             try {
