@@ -155,8 +155,7 @@ function run() {
                     yield altool.uploadApp(appPath, appType, apiKeyId, issuerId, options);
                 }
                 catch (e) {
-                    // TODO(skandar) Instead of searching substring, xml should be parsed and checked by key/value for timout.
-                    if (output.includes('timeout')) {
+                    if (output.includes('The request timed out')) {
                         throw Error('timeout');
                     }
                 }
