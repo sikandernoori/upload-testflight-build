@@ -35,9 +35,9 @@ async function run(): Promise<void> {
       } catch (e) {
         core.warning(`REALLY!!! ${e}`)
 
-        if (output.includes('timeout')) {
-          throw Error('timeout')
-        }
+        // if (output.includes('timeout')) {
+        throw Error('timeout')
+        // }
       }
     }
 
