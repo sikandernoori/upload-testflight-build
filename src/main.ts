@@ -32,11 +32,12 @@ async function run(): Promise<void> {
     const uploadWithRetry = async (): Promise<void> => {
       try {
         await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
+      } catch (e) {
+        core.warning(`REALLY!!! ${e}`)
+
         if (output.includes('timeout')) {
           throw Error('timeout')
         }
-      } catch (e) {
-        core.warning(`REALLY!!! ${e}`)
       }
     }
 
