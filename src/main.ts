@@ -47,8 +47,7 @@ async function run(): Promise<void> {
         retries: retryAttempts,
         delay: 2000,
         retryIf(error) {
-          core.warning(`ERROR WAS: ${error.message}`)
-          return true
+          return error.message === 'timeout'
         }
       })
     } catch (error) {
