@@ -36,7 +36,7 @@ async function run(): Promise<void> {
           throw Error('timeout')
         }
       } catch (e) {
-        core.warning('REALLY!!!')
+        core.warning(`REALLY!!! ${e}`)
       }
     }
 

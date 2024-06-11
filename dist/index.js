@@ -158,7 +158,7 @@ function run() {
                     }
                 }
                 catch (e) {
-                    core.warning('REALLY!!!');
+                    core.warning(`REALLY!!! ${e}`);
                 }
             });
             try {
