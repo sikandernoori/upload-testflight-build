@@ -40,7 +40,7 @@ async function run(): Promise<void> {
       try {
         await uploadWithRetry()
       } catch (error) {
-        core.warning(`name: ${error.name} | message ${error.message}`)
+        core.warning(`${error} complete`)
         if (error.name === 'timeout') {
           throw error
         } else {

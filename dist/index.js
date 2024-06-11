@@ -161,7 +161,7 @@ function run() {
                     yield uploadWithRetry();
                 }
                 catch (error) {
-                    core.warning(`name: ${error.name} | message ${error.message}`);
+                    core.warning(`${error} complete`);
                     if (error.name === 'timeout') {
                         throw error;
                     }
