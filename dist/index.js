@@ -161,7 +161,7 @@ function run() {
                     yield uploadWithRetry();
                 }
                 catch (error) {
-                    if (error.message === 'timeout') {
+                    if (error.name === 'timeout') {
                         throw error;
                     }
                     else {

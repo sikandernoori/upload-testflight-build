@@ -40,7 +40,7 @@ async function run(): Promise<void> {
       try {
         await uploadWithRetry()
       } catch (error) {
-        if (error.message === 'timeout') {
+        if (error.name === 'timeout') {
           throw error
         } else {
           core.setFailed(`Upload failed: ${error.message}`)
