@@ -33,7 +33,7 @@ async function run(): Promise<void> {
 
     const uploadWithRetry = async (): Promise<void> => {
       core.warning("DEBUG")
-      await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
+      // await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
         throw new Error('Upload failed due to timeout')
       }
