@@ -32,7 +32,7 @@ async function run(): Promise<void> {
     await altool.installPrivateKey(apiKeyId, apiPrivateKey)
 
     const uploadWithRetry = async (): Promise<void> => {
-      core.setOutput('altool-response', "DEBUG")
+      core.warning("DEBUG")
       await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
         throw new Error('Upload failed due to timeout')
