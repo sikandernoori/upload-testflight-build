@@ -21,7 +21,7 @@ inputs:
   retry-attempts-on-timeout:
     description: 'Number of retry attempts to perform if upload to AppStore TestFlight failed due to timeout from server end'
     required: false
-    default: '1'
+    default: '0'
 outputs:
   altool-response:
     description: 'XML output from altool'
