@@ -28,13 +28,11 @@ async function run(): Promise<void> {
       }
     }
 
-    // await altool.installPrivateKey(apiKeyId, apiPrivateKey)
+    await altool.installPrivateKey(apiKeyId, apiPrivateKey)
 
     const uploadWithRetry = async (): Promise<void> => {
       core.warning('SRK')
-      core.debug('SRK')
-      core.setFailed('SRK')
-      // await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
+      await altool.uploadApp(appPath, appType, apiKeyId, issuerId, options)
       if (output.includes('timeout')) {
         throw new Error('Upload failed due to timeout')
       }
@@ -49,7 +47,7 @@ async function run(): Promise<void> {
       return
     }
 
-    // await altool.deleteAllPrivateKeys()
+    await altool.deleteAllPrivateKeys()
 
     core.setOutput('altool-response', output)
   } catch (error) {
